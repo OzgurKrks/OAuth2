@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/auth/me", {
+      const response = await axios.get("http://localhost:3000/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(response.data.user);
@@ -47,13 +47,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        email,
+        password,
+      });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       setToken(token);
@@ -65,14 +62,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const register = async (name: string, email: string, password: string) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:3000/auth/register", {
+        name,
+        email,
+        password,
+      });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       setToken(token);
@@ -83,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href = "http://localhost:3000/auth/google";
   };
 
   const logout = () => {
